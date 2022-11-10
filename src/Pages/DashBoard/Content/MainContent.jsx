@@ -1555,7 +1555,7 @@ const MainContent = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-6">
-                            {new Date().getFullYear()} © Minia.
+                            {new Date().getFullYear()} © NJ Abaacorp
                         </div>
 
                     </div>

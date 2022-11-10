@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import { useState, useEffect } from 'react';
 import UseBlogs from '../../../Hooks/UseBlogs';
 import { useRef } from 'react';
+import Spinner from '../../../Components/Spinner/Spinner';
 
 
 const Blog = () => {
@@ -58,7 +59,9 @@ const Blog = () => {
             })
         SetReLoad(reLoad + 5)
     }
-
+    const updateBlog = (id) => {
+        alert(id)
+    }
     return (
         <div className="container">
 
@@ -127,7 +130,7 @@ const Blog = () => {
             </div>
             <br /><br />
             <div className="container blog-manage-section">
-                <div className="container">
+                {isLoading ? <Spinner /> : <div className="container">
                     {
                         (blogs.length > 0) ? <Table responsive>
                             <thead>
@@ -143,14 +146,18 @@ const Blog = () => {
                             </thead>
                             <tbody>
                                 {
-                                    blogs.map((blog, index) => <tr key={index}><td>{index + 1}</td> <td> <img style={{ width: "40px", height: '35px' }} src={` data:image/jpeg;base64,${blog.img}`} /> <h5 className='p-2 d-inline'>{blog.title}</h5></td> <td> <button className="btn btn-danger" onClick={() => deleteBlog(blog._id)}><i class="bi bi-trash-fill"></i></button></td></tr>)
+                                    blogs.map((blog, index) => <tr key={index}><td>{index + 1}</td> <td> <img style={{ width: "40px", height: '35px' }} src={` data:image/jpeg;base64,${blog.img}`} /> <h5 className='p-2 d-inline'>{blog.title}</h5></td> <td>
+                                        <button className="btn btn-danger" onClick={() => updateBlog(blog._id)}><i class="bi bi-pencil-square"></i></button>
+
+                                        <button className="btn btn-danger" onClick={() => deleteBlog(blog._id)}><i class="bi bi-trash-fill"></i></button></td></tr>)
                                 }
                             </tbody>
                         </Table> : ''
                     }
 
 
-                </div>
+                </div>}
+
             </div>
         </div>
     )

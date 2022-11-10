@@ -3,7 +3,7 @@ import UseSlider from '../../Hooks/UseSlider'
 import HeroSlider from '../HeroSlider/HeroSlider';
 
 const HeroSection = () => {
-    const {slider }= UseSlider();
+    const { slider } = UseSlider();
     console.log(slider)
     return (
         <div>

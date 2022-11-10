@@ -12,7 +12,7 @@ const Instagram = () => {
   const [postTitle, setPostTitle] = useState('')
   const imageInputRef = useRef();
 
-  const [instagramPost, reLoad, SetReLoad, isLoading, setInstagramPost] = UseInstagram()
+  const { instagramPost, reLoad, SetReLoad, isLoading, setInstagramPost } = UseInstagram()
 
   const [isActive, setIsActive] = useState(false)
 

@@ -10,7 +10,7 @@ const Slider = () => {
   const [sliderDesc, setSliderDesc] = useState('')
   const imageInputRef = useRef();
   const [addBtnActive, setAddBtnActive] = useState(false)
-  const [slider, reLoad, SetReLoad, isLoading, setSlider] = UseSlider()
+  const { slider, reLoad, SetReLoad, isLoading, setSlider } = UseSlider()
 
   const handleSubmit = (e) => {
     e.preventDefault();

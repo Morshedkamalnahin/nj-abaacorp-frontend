@@ -12,7 +12,7 @@ const Projects = () => {
     const [projectTitle, setProjectTitle] = useState('')
     const imageInputRef = useRef();
 
-    const [projects, reLoad, SetReLoad, isLoading, setProjects] = UseProject()
+    const { projects, reLoad, SetReLoad, isLoading, setProjects } = UseProject()
 
     const [isActive, setIsActive] = useState(false)
 

@@ -18,7 +18,7 @@ const Header = () => {
                                     <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} />
                                 </span>
                                 <span className="logo-lg">
-                                    <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} /> <span className="logo-txt">Minia</span>
+                                    <img src="assets/images/logo.png" alt="" style={{ height: 24 }} /> <span className="logo-txt">NJ Abaacorp</span>
                                 </span>
                             </Link>
 
@@ -27,7 +27,7 @@ const Header = () => {
                                     <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} />
                                 </span>
                                 <span className="logo-lg">
-                                    <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} /> <span className="logo-txt">Minia</span>
+                                    <img src="" alt="" style={{ height: 24 }} /> <span className="logo-txt">NJ Abaacorp</span>
                                 </span>
                             </Link>
                         </div>
@@ -260,7 +260,7 @@ const Header = () => {
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img className="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                                             alt="Header Avatar" />
-                                        <span className="d-none d-xl-inline-block ms-1 fw-medium">{user.name}</span>
+                                        <span className="d-none d-xl-inline-block ms-1 fw-medium">{user ? user.displayName : 'user'}</span>
                                         <i className="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                                     </button>
                                     <div className="dropdown-menu dropdown-menu-end">

@@ -6,6 +6,7 @@ import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import AuthProvider from "./context/AuthProvider";
 import Blogs from "./Pages/Blogs/Blogs";
+import ContactPage from "./Pages/ContactPage/ContactPage";
 import Blog from "./Pages/DashBoard/Blogs/Blog";
 import Contacts from "./Pages/DashBoard/Contact/Contacts";
 import MainContent from "./Pages/DashBoard/Content/MainContent";
@@ -38,7 +39,7 @@ function App() {
                 <Project />
               </RequireAuth>
             } />
-            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/contacts" element={<ContactPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/blog" element={<Blogs />} />
             <Route path="/blog/:blogId" element={<BlogDetails />}></Route>

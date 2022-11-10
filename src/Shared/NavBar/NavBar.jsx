@@ -25,7 +25,7 @@ const NavBar = () => {
 
             <div className="uk-flex uk-flex-space-between uk-flex-middle">
               <div>
-                <a className="tm-logo" href="index-2.html"><img src="assets/logo.png" alt="" /></a>
+                <a className="tm-logo" href="/"><img src="assets/logo.png" alt="" /></a>
               </div>
               <div className="uk-navbar-content uk-visible-large">
                 <ul className="uk-navbar-nav">
@@ -35,6 +35,9 @@ const NavBar = () => {
                   <li><Link to={'/projects'} >Projects</Link></li>
                   <li><Link to={'/contacts'} >Contacts</Link></li>
                   <li><Link to={'/blog'} >Blog</Link></li>
+                  {
+                    user.email && <li><Link to={'/dash-board'}> Dashboard</Link></li>
+                  }
                   {
                     user?.email ? <li><button className='btn btn-danger' onClick={logOut}>logout</button></li> : <li><Link to={'/login'} >Login</Link></li>
                   }
@@ -66,8 +69,14 @@ const NavBar = () => {
               <li><Link to={'/about'}>About</Link></li>
               <li><Link to={'/projects'} >Projects</Link></li>
               <li><Link to={'/contacts'} >Contacts</Link></li>
-              <li><Link to={'/login'} >Login</Link></li>
+
               <li><Link to={'/blog'} >Blog</Link></li>
+              {
+                user.email && <li><Link to={'/dash-board'}> Dashboard</Link></li>
+              }
+              {
+                user?.email ? <li><button className='btn btn-danger' onClick={logOut}>logout</button></li> : <li><Link to={'/login'} >Login</Link></li>
+              }
             </ul>
           </div>
         </div>

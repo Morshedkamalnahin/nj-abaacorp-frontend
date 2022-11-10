@@ -1,6 +1,6 @@
 
 import Button from 'react-bootstrap/esm/Button'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth'
 
 import React, { useRef, useState } from 'react';
@@ -25,13 +25,14 @@ const Login = () => {
     const [logInEmail, setLogInEmail] = useState('')
     const [logInPassword, setLogInPassword] = useState('')
     const [justifyActive, setJustifyActive] = useState('tab1');;
-    const { googleSignIn, logUp, error, logIn } = useAuth();
+    const { googleSignIn, logUp, error, setError, logIn, user, setUser, updateProfileName } = useAuth();
 
     const location = useLocation();
     const navigate = useNavigate()
     const from = location?.state?.from.pathname || '/dash-board'
 
     const handleJustifyClick = (value) => {
+        setError('')
         if (value === justifyActive) {
             return;
         }
@@ -39,17 +40,43 @@ const Login = () => {
         setJustifyActive(value);
     };
     const handleSignUp = () => {
+        console.log(user)
+        logUp(email, password).then(async (res) => {
+            // Signed in 
+            await updateProfileName(name)
+            const user = res.user;
 
-        logUp(email, password, name)
-        console.log(error)
-        console.log(email, password, name)
+            setUser(user)
+            setError('')
+
+            // alert(user.displayName, "LogedIn")
+            navigate('/')
+
+
+
+
+        })
+            .catch((error) => {
+                console.log(error.message)
+                // ..
+                setError(error)
+            });
+
     }
     const handleLogIn = () => {
-        logIn(logInEmail, logInPassword).then(res => {
+        logIn(logInEmail, logInPassword)
+            .then(result => {
+                const user = result.user;
+                setError('')
+                navigate(from, { replace: true })
+                console.log(user)
 
-            navigate(from, { replace: true })
-            console.log(res.user)
-        })
+            })
+            .catch(error => {
+                setError(error)
+                console.log(error.message)
+            })
+
 
     }
 
@@ -58,7 +85,9 @@ const Login = () => {
     const hanldeGoogleSignIn = () => {
         googleSignIn().then(res => {
             console.log(res)
+            setUser(res.user)
             navigate(from, { replace: true })
+            setError('')
         })
         // console.log(error)
     }
@@ -72,7 +101,7 @@ const Login = () => {
 
 
 
-                <h5>{error}</h5>
+
                 <MDBContainer className="p-3 my-4 d-flex flex-column col-lg-6 col-sm-6 col-md-9  ">
 
                     <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
@@ -97,8 +126,8 @@ const Login = () => {
                                 <br />
                                 <div className='d-flex justify-content-between mx-auto' style={{ width: '40%' }}>
                                     <br />
-                                    <p>Login With   <MDBBtn onClick={hanldeGoogleSignIn} tag='a' className='mx-3' color='none' style={{ color: '#1266f1' }}>
-                                        <MDBIcon fab icon='google' size="lg" />
+                                    <p>Login With : <MDBBtn tag='a' className='mx-3' color='none' style={{ color: '#1266f1' }}>
+                                        <MDBIcon onClick={hanldeGoogleSignIn} fab icon='google' size="lg" />
                                     </MDBBtn></p>
 
 
@@ -111,12 +140,13 @@ const Login = () => {
                             <MDBInput wrapperClass='mb-4' onChange={(e) => setLogInEmail(e.target.value)} label='Email address' id='form1' type='email' />
                             <MDBInput wrapperClass='mb-4' onChange={(e) => setLogInPassword(e.target.value)} label='Password' id='form2' type='password' />
 
+                            <br /><span className='danger m-2'>{error ? error.message : ''}</span>
                             <div className="d-flex justify-content-between mx-4 mb-4">
                                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
                                 <a href="!#">Forgot password?</a>
                             </div>
 
-                            <MDBBtn className="mb-4 w-100" onClick={handleLogIn}>Sign in</MDBBtn>
+                            <button className="mb-4 btn btn-primary w-100" onClick={handleLogIn}>Sign in</button>
                             <p className="text-center">Not a member? <a href="#!">Register</a></p>
 
                         </MDBTabsPane>
@@ -150,12 +180,13 @@ const Login = () => {
                             <MDBInput wrapperClass='mb-4' label='Name' onChange={(e) => setName(e.target.value)} id='form1' type='text' />
                             <MDBInput wrapperClass='mb-4' onChange={(e) => setEmail(e.target.value)} label='Email' id='form1' type='email' />
                             <MDBInput wrapperClass='mb-4' onChange={(e) => setPassword(e.target.value)} label='Password' id='form1' type='password' />
+                            <br /><span className=' m-2'>{error ? error.message : ''}</span><br />
 
                             <div className='d-flex justify-content-center mb-4'>
                                 <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />
                             </div>
 
-                            <MDBBtn className="mb-4 w-100" onClick={handleSignUp}>Sign up</MDBBtn>
+                            <button className="btn btn-primary mb-4 w-100 " onClick={handleSignUp}>Sign up</button>
 
                         </MDBTabsPane>
 

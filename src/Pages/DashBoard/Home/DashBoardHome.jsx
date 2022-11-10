@@ -4,6 +4,7 @@ import Blog from '../Blogs/Blog'
 import Contacts from '../Contact/Contacts'
 
 import MainContent from '../Content/MainContent'
+import DashFooter from '../DashFooter/DashFooter'
 
 import Header from '../Header/Header'
 import Instagram from '../Instagram/Instagram'
@@ -31,6 +32,7 @@ const DashBoardHome = () => {
 
             </div>
             {/* <MainContent /> */}
+            <DashFooter />
         </div>
     )
 }
