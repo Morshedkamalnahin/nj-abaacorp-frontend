@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 const SideBar = () => {
     return (
+
+
         <div>
             <div className="vertical-menu">
 
@@ -18,6 +20,12 @@ const SideBar = () => {
                                 <Link to='/dash-board'>
                                     <i data-feather="home"></i>
                                     <span data-key="t-dashboard">Dashboard</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/'>
+                                    <i data-feather="home"></i>
+                                    <span data-key="t-dashboard">Home</span>
                                 </Link>
                             </li>
                             <li>
@@ -38,7 +46,7 @@ const SideBar = () => {
                                     <i data-feather="grid"></i>
                                     <span data-key="t-apps">Apps</span>
                                 </a>
-                             
+
                             </li> */}
 
                             {/* <li>
@@ -104,41 +112,10 @@ const SideBar = () => {
 
 
 
-
-
-                            {/* <li>
-                                <a href="javascript: void(0);" className="has-arrow">
-                                    <i data-feather="gift"></i>
-                                    <span data-key="t-ui-elements">Extended</span>
-                                </a>
-                                <ul className="sub-menu" aria-expanded="false">
-                                    <li><a href="extended-lightbox.html" data-key="t-lightbox">Lightbox</a></li>
-                                    <li><a href="extended-rangeslider.html" data-key="t-range-slider">Range Slider</a></li>
-                                    <li><a href="extended-sweet-alert.html" data-key="t-sweet-alert">SweetAlert 2</a></li>
-                                    <li><a href="extended-session-timeout.html" data-key="t-session-timeout">Session Timeout</a></li>
-                                    <li><a href="extended-rating.html" data-key="t-rating">Rating</a></li>
-                                    <li><a href="extended-notifications.html" data-key="t-notifications">Notifications</a></li>
-                                </ul>
-                            </li> */}
-
-
-
-
-
-
-
-
                         </ul>
 
                         <div className="card sidebar-alert border-0 text-center mx-4 mb-0 mt-5">
-                            <div className="card-body">
-                                <img src="assets/images/giftbox.png" alt="" />
-                                <div className="mt-4">
-                                    <h5 className="alertcard-title font-size-16">Unlimited Access</h5>
-                                    <p className="font-size-13">Upgrade your plan from a Free trial, to select ‘Business Plan’.</p>
-                                    <a href="#!" className="btn btn-primary mt-2">Upgrade Now</a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 

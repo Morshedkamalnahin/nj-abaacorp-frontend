@@ -4,6 +4,8 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useState, useEffect } from 'react';
+import UseBlogs from '../../../Hooks/UseBlogs';
+import { useRef } from 'react';
 
 
 const Blog = () => {
@@ -12,9 +14,9 @@ const Blog = () => {
     const [descreption, setDescreption] = useState('')
     const [date, setDate] = useState('')
     const [image, setImage] = useState(null)
-    const [blogs, setBlogs] = useState([])
+    const { blogs, reLoad, SetReLoad, isLoading, setBlogs } = UseBlogs()
 
-
+    const imageInputRef = useRef();
 
 
     const handleSubmit = (e) => {
@@ -31,20 +33,31 @@ const Blog = () => {
             method: 'POST',
 
             body: formData
-        }).then(res => res.json()).then(data => console.log(data)).catch(err => console.log(err))
+        }).then(res => res.json())
+            .then(data => (SetReLoad(reLoad + 1), console.log(data)))
 
         //clear all input field
         setTitle('')
         setDate('')
         setDescreption('')
+        imageInputRef.current.value = "";
+        setImage(null)
+
 
     }
 
-    useEffect(() => {
-        fetch('http://localhost:5000/add_blog')
+    const deleteBlog = (id) => {
+
+        fetch(`http://localhost:5000/blog_delete/${id}`, {
+            method: 'DELETE'
+        })
             .then(res => res.json())
-            .then(data => setBlogs(data))
-    }, [])
+            .then(result => {
+                console.log(result)
+
+            })
+        SetReLoad(reLoad + 5)
+    }
 
     return (
         <div className="container">
@@ -94,9 +107,10 @@ const Blog = () => {
                             <Form.Group className='col-4 sm-12' controlId="formGridState">
                                 <Form.Label>Image</Form.Label>
                                 <Form.Control
-
+                                    ref={imageInputRef}
                                     accept='image/*'
                                     onChange={(e) => setImage(e.target.files[0])}
+
                                     required type='file'
                                 />
                             </Form.Group>
@@ -114,24 +128,26 @@ const Blog = () => {
             <br /><br />
             <div className="container blog-manage-section">
                 <div className="container">
-                    <Table responsive="sm">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
+                    {
+                        (blogs.length > 0) ? <Table responsive>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
 
 
-                                <th> Description</th>
+                                    <th> Description</th>
 
-                                <th> Action</th>
+                                    <th> Action</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                blogs?.map((blog, index) => <tr key={index}><td>{index + 1}</td> <td> {blog.title}</td> <td> <button className="btn btn-danger"><i class="bi bi-trash-fill"></i></button></td></tr>)
-                            }
-                        </tbody>
-                    </Table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    blogs.map((blog, index) => <tr key={index}><td>{index + 1}</td> <td> <img style={{ width: "40px", height: '35px' }} src={` data:image/jpeg;base64,${blog.img}`} /> <h5 className='p-2 d-inline'>{blog.title}</h5></td> <td> <button className="btn btn-danger" onClick={() => deleteBlog(blog._id)}><i class="bi bi-trash-fill"></i></button></td></tr>)
+                                }
+                            </tbody>
+                        </Table> : ''
+                    }
 
 
                 </div>

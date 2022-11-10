@@ -1,6 +1,11 @@
 import React from 'react'
+import { useState } from 'react'
+import Button from 'react-bootstrap/esm/Button';
+import { Link } from 'react-router-dom'
+import useAuth from '../../../Hooks/useAuth';
 
 const Header = () => {
+    const { user, logOut } = useAuth();
     return (
         <div>
             <header id="page-topbar">
@@ -8,41 +13,41 @@ const Header = () => {
                     <div className="d-flex">
 
                         <div className="navbar-brand-box">
-                            <a href="index.html" className="logo logo-dark">
+                            <Link to={"/"} className="logo logo-dark">
                                 <span className="logo-sm">
                                     <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} />
                                 </span>
                                 <span className="logo-lg">
                                     <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} /> <span className="logo-txt">Minia</span>
                                 </span>
-                            </a>
+                            </Link>
 
-                            <a href="index.html" className="logo logo-light">
+                            <Link to={'/'} className="logo logo-light">
                                 <span className="logo-sm">
                                     <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} />
                                 </span>
                                 <span className="logo-lg">
                                     <img src="assets/images/logo-sm.svg" alt="" style={{ height: 24 }} /> <span className="logo-txt">Minia</span>
                                 </span>
-                            </a>
+                            </Link>
                         </div>
 
                         <button type="button" className="btn btn-sm px-3 font-size-16 header-item" id="vertical-menu-btn">
                             <i className="fa fa-fw fa-bars"></i>
                         </button>
 
-
+                        {/* 
                         <form className="app-search d-none d-lg-block">
                             <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="Search..." />
                                 <button className="btn btn-primary" type="button"><i className="bx bx-search-alt align-middle"></i></button>
                             </div>
-                        </form>
+                        </form> */}
                     </div>
 
                     <div className="d-flex">
 
-                        <div className="dropdown d-inline-block d-lg-none ms-2">
+                        {/* <div className="dropdown d-inline-block d-lg-none ms-2">
                             <button type="button" className="btn header-item" id="page-header-search-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i data-feather="search" className="icon-lg"></i>
@@ -247,28 +252,36 @@ const Header = () => {
                             <button type="button" className="btn header-item right-bar-toggle me-2">
                                 <i data-feather="settings" className="bi bi-gear-fill"></i>
                             </button>
-                        </div>
-
+                        </div> */}
                         <div className="dropdown d-inline-block">
-                            <button type="button" className="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img className="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
-                                    alt="Header Avatar" />
-                                <span className="d-none d-xl-inline-block ms-1 fw-medium">Shawn L.</span>
-                                <i className="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                            </button>
-                            <div className="dropdown-menu dropdown-menu-end">
+                            {user ?
+                                <div className="">
+                                    <button type="button" className="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img className="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                                            alt="Header Avatar" />
+                                        <span className="d-none d-xl-inline-block ms-1 fw-medium">{user.name}</span>
+                                        <i className="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                    </button>
+                                    <div className="dropdown-menu dropdown-menu-end">
 
-                                <a className="dropdown-item" href="apps-contacts-profile.html"><i className="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profile</a>
-                                <a className="dropdown-item" href="auth-lock-screen.html"><i className="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a>
-                                <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="auth-logout.html"><i className="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
-                            </div>
+                                        <a className="dropdown-item" to={'/profile'}><i className="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profile</a>
+
+                                        <div className="dropdown-divider"></div>
+                                        <Button className="dropdown-item" onClick={logOut} ><i className="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</Button>
+                                    </div>
+                                </div>
+
+
+                                : <Link to={'/login'} ><i className="mdi mdi-logout font-size-16 align-middle me-1"></i> Login</Link>
+                            }
+
                         </div>
-
                     </div>
                 </div>
             </header>
+
+
         </div>
     )
 }

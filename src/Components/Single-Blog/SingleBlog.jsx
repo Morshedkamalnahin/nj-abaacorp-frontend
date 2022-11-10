@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const SingleBlog = ({ blog }) => {
     return (
@@ -9,7 +10,7 @@ const SingleBlog = ({ blog }) => {
                     <h4 className='t-center'> {blog.title}</h4>
                     <br /><p className='p-1'>{blog.dec.slice(0, 150)} .  .  .  .</p>
                     <br />
-                    <button className='btn btn-danger'>read more ...</button>
+                    <button className='btn btn-danger'><Link to={`/blog/${blog._id}`}>read more ...</Link></button>
                 </div>
             </div>
         </div>

@@ -1,12 +1,16 @@
 import React from 'react'
+import UseBlogs from '../../../Hooks/UseBlogs'
 
 const MainContent = () => {
+    const { blogs } = UseBlogs()
     return (
         <div>
 
 
             <div className="">
-                <div className="container-fluid">
+
+
+                {/* <div className="container-fluid">
 
 
                     <div className="row">
@@ -1541,7 +1545,7 @@ const MainContent = () => {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
                 {/* <!-- container-fluid --> */}
             </div>
             {/* <!-- End Page-content --> */}
@@ -1551,13 +1555,9 @@ const MainContent = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Minia.
+                            {new Date().getFullYear()} © Minia.
                         </div>
-                        <div className="col-sm-6">
-                            <div className="text-sm-end d-none d-sm-block">
-                                Design & Develop by <a href="#!" className="text-decoration-underline">Themesbrand</a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </footer>

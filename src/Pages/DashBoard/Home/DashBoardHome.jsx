@@ -4,12 +4,14 @@ import Blog from '../Blogs/Blog'
 import Contacts from '../Contact/Contacts'
 
 import MainContent from '../Content/MainContent'
+
 import Header from '../Header/Header'
 import Instagram from '../Instagram/Instagram'
 import Orders from '../Order/Orders'
 import Packages from '../Package/Packages'
 import Projects from '../Projects/Projects'
 import SideBar from '../SideBar/SideBar'
+
 import Slider from '../Slider/Slider'
 import User from '../User/User'
 
@@ -20,6 +22,8 @@ const DashBoardHome = () => {
         <div >
             <Header />
             <SideBar />
+
+
             <div className="main-content">
                 <div className="page-content">
                     {CurrentComponent}
